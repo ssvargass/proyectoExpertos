@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Listado de campos
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="cards-bg">
+  <ion-card *ngFor="let field of fields">
+    <ion-card-header>
+      {{ field.label }}
+    </ion-card-header>
+    <ion-card-content>
+      <strong>Tipo: </strong> {{ field.type.name }}
+      <div *ngIf="field.options.length > 0">
+        <strong>Opciones:</strong>
+        <ul>
+          <li *ngFor="let option of field.options">
+            <i>{{ option.key }}:</i> {{ option.value }}
+          </li>
+        </ul>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

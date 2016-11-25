@@ -1,17 +1,25 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
-</ion-header>
+<ion-header></ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding >
+  <h1>Aptitud de conducción</h1>
+
+  <ion-list *ngFor="let field of fields; let i = index">
+    <ion-item>
+      <ion-label >{{ field.label }}</ion-label>
+      
+      <ion-select *ngIf="field.type.name == 'Select'" [(ngModel)]="field.value" (ngModelChange)="getConditionField(i)">
+        <ion-option *ngFor="let option of field.options" [value]="option.key">{{ option.value }}</ion-option>
+      </ion-select>
+
+      <ion-input *ngIf="field.type.name == 'Number'" [(ngModel)]="field.value" type="number" (ngModelChange)="getConditionField(i)"></ion-input>
+      
+      <ion-toggle *ngIf="field.type.name == 'Toogle'" [(ngModel)]="field.value" value="si" checked="true" (ngModelChange)="getConditionField(i)"></ion-toggle>
+
+      <ion-datetime *ngIf="field.type.name == 'Date'" [(ngModel)]="field.value" displayFormat="MMM DD YYYY" (ngModelChange)="getConditionField(i)"></ion-datetime>
+
+    </ion-item>
+  </ion-list>
+  
+  <button ion-button block color="dark" (click)="analize()">Analizar</button>
+
 </ion-content>
